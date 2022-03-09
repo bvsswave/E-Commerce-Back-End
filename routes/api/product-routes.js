@@ -4,10 +4,46 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
+
 router.get('/', (req, res) => {
+
   // find all products
+  
+  Product.findAll({
+    attributes: [
+      'id',
+      'product_name',
+      'price',
+      'stock',
+      'category_id'
+    ],
+    include: [
+
   // be sure to include its associated Category and Tag data
+
+  {
+    model: Category,
+    attributes: ['id', 'category_name']
+  },
+  {
+    model: Tag,
+    attributes: ['id', 'tag_name']
+  }
+] 
+})
+.then(productData => {
+  if (!productData) {
+    res.status(404).json({ message: "No data found" });
+    return;
+  }
+  res.json(productData);
+})
+.catch(err => {
+  console.log(err);
+  res.status(500).json({ message: "An error has occurred" })
+     }); 
 });
+
 
 // get one product
 router.get('/:id', (req, res) => {

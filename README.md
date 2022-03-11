@@ -2,9 +2,6 @@
 
 ### GITHUB: https://github.com/bvsswave/E-Commerce-Back-End.git
 
-## Description
-A blog to discuss tech!
-
 ## User Story
 ```
 AS A manager at an internet retail company
